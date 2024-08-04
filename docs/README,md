@@ -1,0 +1,3 @@
+ERROR CODES:
+01 = NO_CPUID
+02 = long mode not available
