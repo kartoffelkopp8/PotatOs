@@ -38,3 +38,4 @@ clean:
 	rm -rf $(BUILD_DIR)
 	rm build/kernel.bin
 	rm iso/boot/kernel.bin
+	rm kernelx86_64.iso

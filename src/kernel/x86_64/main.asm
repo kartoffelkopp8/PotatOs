@@ -33,8 +33,8 @@ _start:
   cpuid 
   and edx, 0x20000000            ; check bit
   jz NO_LONG
-  
-hltBenQ EW3880R
+ 
+  lgdt GDT64
 
 NO_LONG:
   mov al, 0x32
@@ -59,3 +59,15 @@ SECTION .bss
 STACK_BOTTOM:
   resb 1024 * 32         ; 32 kib stack
 STACK_TOP:
+
+SECTION .rodata
+GDT64:
+  ; 0 entry for control
+  dq 0x00 
+  ; Kernel level code segment 
+  dq (1 << 43) | (1 << 44) | (1 << 47) < (1 << 53) ; 
+  ; User level code segment 
+  dq (1 << 43) | (1<< 44) | (1 << 45) | (1 << 46) | (1 << 47) | (1 << 53)
+  ; Data Segment
+  dq (1 << 47) 
+  ; TSS Segment 
